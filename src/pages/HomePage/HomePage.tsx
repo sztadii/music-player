@@ -1,11 +1,10 @@
 import React from 'react'
-import { Typography, TextField, Box, Divider, Container } from '@mui/material'
-import { useSearchState } from 'store/generalStore'
+import { Typography, Divider, Container, Box } from '@mui/material'
 import TopAlbums from './components/TopAlbums'
+import AlbumsSearchField from './components/AlbumsSearchField'
 import styles from './HomePage.module.scss'
 
 export default function HomePage() {
-  const [search, setSearch] = useSearchState()
   return (
     <Container className={styles.wrapper} sx={{ my: 4 }}>
       <Typography variant="h3" mb={3}>
@@ -13,15 +12,7 @@ export default function HomePage() {
       </Typography>
 
       <Box mb={3}>
-        <TextField
-          fullWidth
-          label="Search"
-          variant="outlined"
-          value={search}
-          onChange={e => {
-            setSearch(e.target.value)
-          }}
-        />
+        <AlbumsSearchField />
       </Box>
 
       <Divider sx={{ my: 3 }} />
