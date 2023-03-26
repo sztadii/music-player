@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react'
-import { Skeleton, Typography } from '@mui/material'
-import TopAlbums from './TopAlbums'
+import { Typography } from '@mui/material'
+import SkeletonTextList from 'components/SkeletonTextList'
+import TopAlbums from './components/TopAlbums'
 import styles from './Home.module.scss'
 
 export default function Home() {
@@ -10,15 +11,7 @@ export default function Home() {
         Top albums
       </Typography>
 
-      <Suspense
-        fallback={
-          <div>
-            {new Array(10).fill(null).map((_, index) => {
-              return <Skeleton key={index} width={300} variant="text" />
-            })}
-          </div>
-        }
-      >
+      <Suspense fallback={<SkeletonTextList length={10} width={300} />}>
         <TopAlbums />
       </Suspense>
     </div>
