@@ -11,4 +11,4 @@ npm start
 ```
 
 ## Production
-The app is deployed to the [Vercel](https://music-player-sztadii.vercel.app)
+[Link to production](https://music-player-sztadii.vercel.app)
