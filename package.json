@@ -10,6 +10,12 @@
     "format": "prettier --ignore-path .gitignore --write \"**/*.{ts,tsx,js,json,scss,css}\""
   },
   "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -17,14 +23,11 @@
     "@types/node": "^16.18.21",
     "@types/react": "^18.0.29",
     "@types/react-dom": "^18.0.11",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4",
+    "bundlesize": "^0.18.1",
     "husky": "^4.3.8",
     "lint-staged": "^12.3.2",
-    "prettier": "^2.5.1"
+    "prettier": "^2.5.1",
+    "typescript": "^4.9.5"
   },
   "eslintConfig": {
     "extends": [
@@ -60,5 +63,22 @@
     "*.{ts,tsx,js,json,scss}": [
       "prettier --write --"
     ]
+  },
+  "bundlesize": [
+    {
+      "path": "./build/index.html",
+      "maxSize": "2 kb"
+    },
+    {
+      "path": "./build/**/*.js",
+      "maxSize": "200 kB"
+    },
+    {
+      "path": "./build/**/*.css",
+      "maxSize": "20 kB"
+    }
+  ],
+  "engines": {
+    "node": "16.0.0"
   }
 }
