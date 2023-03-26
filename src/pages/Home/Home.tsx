@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react'
-import { Typography } from '@mui/material'
+import { Typography, Alert } from '@mui/material'
+import ErrorBoundary from 'components/ErrorBoundary'
 import SkeletonTextList from 'components/SkeletonTextList'
 import TopAlbums from './components/TopAlbums'
 import styles from './Home.module.scss'
@@ -11,9 +12,17 @@ export default function Home() {
         Top albums
       </Typography>
 
-      <Suspense fallback={<SkeletonTextList length={10} width={300} />}>
-        <TopAlbums />
-      </Suspense>
+      <ErrorBoundary
+        fallback={
+          <Alert severity="error">
+            Something went wrong with top albums service :(
+          </Alert>
+        }
+      >
+        <Suspense fallback={<SkeletonTextList length={10} width={300} />}>
+          <TopAlbums />
+        </Suspense>
+      </ErrorBoundary>
     </div>
   )
 }
