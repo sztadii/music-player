@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
-import { RecoilRoot } from 'recoil'
 import { ReactElement } from 'react'
+import { RecoilRoot } from 'recoil'
 
 // Keep this as a helper function, because in larger applications we have many other providers,
 // and we don't want to duplicate this code in each test

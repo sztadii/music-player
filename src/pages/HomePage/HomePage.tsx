@@ -1,6 +1,7 @@
-import { Typography, Divider, Container, Box } from '@mui/material'
-import TopAlbums from './components/TopAlbums'
+import { Box, Container, Divider, Typography } from '@mui/material'
+
 import AlbumsSearchField from './components/AlbumsSearchField'
+import TopAlbums from './components/TopAlbums'
 import styles from './HomePage.module.scss'
 
 export default function HomePage() {

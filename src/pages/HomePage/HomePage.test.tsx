@@ -1,6 +1,7 @@
-import React from 'react'
 import { screen } from '@testing-library/react'
 import { renderWithProviders } from 'helpers/testsHelpers'
+import React from 'react'
+
 import HomePage from './HomePage'
 
 describe('HomePage', () => {
