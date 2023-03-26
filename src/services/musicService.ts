@@ -1,9 +1,5 @@
 import axios from 'axios'
-import { wait } from 'helpers/timeHelpers'
 export async function findTopAlbums(limit = 10): Promise<TopAlbumsResponse> {
-  // Temporary to make response slower and see loading indicator properly
-  await wait(3_000)
-
   const response = await axios.get<TopAlbumsResponse>(
     `https://itunes.apple.com/us/rss/topalbums/limit=${limit}/json`
   )

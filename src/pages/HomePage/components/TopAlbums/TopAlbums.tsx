@@ -85,7 +85,7 @@ function TopAlbumsSkeleton() {
               <ListItemAvatar>
                 <Skeleton variant="circular" width={40} height={40} />
               </ListItemAvatar>
-              <Skeleton variant="text" width={150} />
+              <Skeleton variant="text" width={200} />
             </ListItemButton>
           </ListItem>
         )
