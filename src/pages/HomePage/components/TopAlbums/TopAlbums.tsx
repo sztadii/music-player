@@ -1,9 +1,8 @@
 import React from 'react'
-import { selector, useRecoilValue } from 'recoil'
-import { findTopAlbums, TopAlbumsResponse } from 'services/musicService'
+import { useTopAlbums } from 'store/musicStore'
 
 export default function TopAlbums() {
-  const albums = useRecoilValue(fetchAlbums)
+  const albums = useTopAlbums()
   return (
     <div>
       {albums.map(album => {
@@ -12,11 +11,3 @@ export default function TopAlbums() {
     </div>
   )
 }
-
-const fetchAlbums = selector<TopAlbumsResponse['feed']['entry']>({
-  key: 'fetchAlbums',
-  get: async () => {
-    const response = await findTopAlbums(10)
-    return response.feed.entry
-  }
-})
