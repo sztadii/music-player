@@ -1,20 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { Suspense } from 'react'
 import logo from 'assets/images/logo.svg'
-import { findTopAlbums, TopAlbumsResponse } from 'services/musicService'
+import TopAlbums from './TopAlbums'
 import styles from './Home.module.scss'
 
 export default function Home() {
-  const [albums, setAlbums] = useState<TopAlbumsResponse['feed']['entry']>([])
-
-  useEffect(() => {
-    async function fetchAndSaveAlbums() {
-      const response = await findTopAlbums(10)
-      setAlbums(response.feed.entry)
-    }
-
-    fetchAndSaveAlbums()
-  }, [])
-
   return (
     <div className={styles.wrapper}>
       <section className={styles.section}>
@@ -29,9 +18,9 @@ export default function Home() {
           Learn React
         </a>
 
-        {albums.map(album => {
-          return <p key={album.id.label}>{album.title.label}</p>
-        })}
+        <Suspense fallback={<div>Loading...</div>}>
+          <TopAlbums />
+        </Suspense>
       </section>
     </div>
   )
