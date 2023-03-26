@@ -1,4 +1,3 @@
-import React from 'react'
 import { Typography, Divider, Container, Box } from '@mui/material'
 import TopAlbums from './components/TopAlbums'
 import AlbumsSearchField from './components/AlbumsSearchField'
