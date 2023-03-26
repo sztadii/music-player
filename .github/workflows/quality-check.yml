@@ -1,0 +1,32 @@
+name: Quality check
+
+on: [push]
+
+jobs:
+  quick-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: 'package.json'
+          cache: 'npm'
+
+      - name: Dependency installation
+        run: npm ci
+
+      - name: Linting
+        run: npm run lint
+
+      - name: Unit / integration tests
+        run: npm run test
+
+      - name: Build project
+        run: npm run build
+
+      - name: Check bundle size
+        run: npx bundlesize

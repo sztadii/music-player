@@ -2,31 +2,54 @@
   "name": "music-player",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.21",
-    "@types/react": "^18.0.29",
-    "@types/react-dom": "^18.0.11",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "CI=true react-scripts test --silent",
+    "lint": "npm run lint-scripts && npm run lint-styles && npm run lint-format && npm run lint-file-names",
+    "lint-file-names": "file-naming-enforcer type=kebabCase folder=./src ignore=[setupTests.ts]",
+    "lint-styles": "stylelint --max-warnings 0 \"**/*.scss\"",
+    "lint-scripts": "eslint \"./**/*.{ts,tsx}\" --max-warnings 0 --ignore-path .gitignore",
+    "lint-scripts-fix": "eslint \"./**/*.{ts,tsx}\" --fix --max-warnings 0 --ignore-path .gitignore",
+    "lint-format": "prettier --ignore-path .gitignore --check \"**/*.{ts,tsx,js,json,scss}\"",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.{ts,tsx,js,json,scss}\""
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@mui/material": "^5.11.14",
+    "@tanstack/react-query": "^5.52.2",
+    "axios": "^1.3.4",
+    "lodash": "^4.17.21",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.26.1",
+    "styled-components": "^6.1.11",
+    "web-vitals": "^2.1.4",
+    "zustand": "^4.5.5"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/jest": "^27.5.2",
+    "@types/lodash": "^4.14.191",
+    "@types/node": "^16.18.21",
+    "@types/react": "^18.0.29",
+    "@types/react-dom": "^18.0.11",
+    "bundlesize": "^0.18.1",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "file-naming-enforcer": "^1.8.0",
+    "http-request-mock": "^1.8.14",
+    "husky": "^4.3.8",
+    "lint-staged": "^12.3.2",
+    "prettier": "^2.5.1",
+    "react-scripts": "5.0.1",
+    "sass": "^1.49.0",
+    "stylelint": "^15.3.0",
+    "stylelint-config-standard-scss": "^7.0.1",
+    "typescript": "^4.9.5"
   },
   "browserslist": {
     "production": [
@@ -39,5 +62,77 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/axios.js"
+    }
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "react-app",
+      "react-app/jest",
+      "plugin:jsx-a11y/recommended"
+    ],
+    "rules": {
+      "max-lines": [
+        "error",
+        300
+      ],
+      "react-hooks/exhaustive-deps": "off"
+    }
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard-scss"
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "semi": false,
+    "arrowParens": "avoid",
+    "plugins": [
+      "@trivago/prettier-plugin-sort-imports"
+    ],
+    "importOrder": [
+      "^src/(.*)$",
+      "^[./]"
+    ],
+    "importOrderSeparation": true,
+    "importOrderSortSpecifiers": true
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js}": [
+      "eslint --max-warnings 0 --fix --"
+    ],
+    "*.{scss}": [
+      "stylelint --fix --"
+    ],
+    "*.{ts,tsx,js,json,scss}": [
+      "prettier --write --"
+    ]
+  },
+  "bundlesize": [
+    {
+      "path": "./build/index.html",
+      "maxSize": "2 kb"
+    },
+    {
+      "path": "./build/**/*.js",
+      "maxSize": "220 kB"
+    },
+    {
+      "path": "./build/**/*.css",
+      "maxSize": "20 kB"
+    }
+  ],
+  "engines": {
+    "node": "22.0.0"
   }
 }
