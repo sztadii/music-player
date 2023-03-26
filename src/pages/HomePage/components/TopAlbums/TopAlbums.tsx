@@ -12,6 +12,10 @@ export default function TopAlbums() {
       )
     : albums
 
+  if (!filteredAlbums.length) {
+    return <div>No results</div>
+  }
+
   return (
     <div>
       {filteredAlbums.map(album => {
