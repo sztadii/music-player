@@ -9,7 +9,9 @@ import {
   Skeleton,
   Alert
 } from '@mui/material'
+import truncate from 'lodash/truncate'
 import ErrorBoundary from 'components/ErrorBoundary'
+import Tooltip from 'components/Tooltip'
 import { useMinBreakpoint } from 'helpers/rwdHelpers'
 import { useTopAlbums, useAlbumRatings } from 'store/musicStore'
 import { useSearchState } from 'store/generalStore'
@@ -51,6 +53,7 @@ function TopAlbumsContent() {
       {filteredAlbums.map(album => {
         const albumId = album.id.label
         const albumTitle = album.title.label
+        const titleMaxLength = 40
         return (
           <ListItem
             key={albumId}
@@ -61,7 +64,17 @@ function TopAlbumsContent() {
               <ListItemAvatar>
                 <Avatar alt="Avatar img" src={album['im:image'][0].label} />
               </ListItemAvatar>
-              <ListItemText primary={albumTitle} />
+
+              <ListItemText
+                primary={
+                  <Tooltip
+                    title={albumTitle}
+                    disabled={albumTitle.length < titleMaxLength}
+                  >
+                    {truncate(albumTitle, { length: titleMaxLength })}
+                  </Tooltip>
+                }
+              />
             </ListItemButton>
           </ListItem>
         )
