@@ -1,4 +1,4 @@
-import { Suspense } from 'react'
+import { Suspense, useCallback } from 'react'
 import {
   ListItem,
   Rating,
@@ -32,7 +32,6 @@ export default function TopAlbums() {
 function TopAlbumsContent() {
   const albums = useTopAlbums()
   const [search] = useSearchState()
-  const [ratings, setRatings] = useAlbumRatings()
 
   const filteredAlbums = search
     ? albums.filter(album =>
@@ -53,17 +52,7 @@ function TopAlbumsContent() {
           <ListItem
             key={albumId}
             disablePadding
-            secondaryAction={
-              <Rating
-                value={ratings[albumId]}
-                onChange={(e, value) => {
-                  setRatings({
-                    ...ratings,
-                    [albumId]: value || 0
-                  })
-                }}
-              />
-            }
+            secondaryAction={<AlbumRatings albumId={albumId} />}
           >
             <ListItemButton>
               <ListItemAvatar>
@@ -101,4 +90,22 @@ function TopAlbumsSkeleton() {
       })}
     </div>
   )
+}
+
+interface AlbumRatingsProps {
+  albumId: string
+}
+
+function AlbumRatings(props: AlbumRatingsProps) {
+  const { albumId } = props
+  const [ratings, setRatings] = useAlbumRatings()
+
+  const updateRatings = useCallback((e: unknown, value: number | null) => {
+    setRatings({
+      ...ratings,
+      [albumId]: value || 0
+    })
+  }, [])
+
+  return <Rating value={ratings[albumId]} onChange={updateRatings} />
 }
