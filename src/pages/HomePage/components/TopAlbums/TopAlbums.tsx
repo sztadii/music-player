@@ -10,6 +10,7 @@ import {
   Alert
 } from '@mui/material'
 import ErrorBoundary from 'components/ErrorBoundary'
+import { useMinBreakpoint } from 'helpers/rwdHelpers'
 import { useTopAlbums, useAlbumRatings } from 'store/musicStore'
 import { useSearchState } from 'store/generalStore'
 
@@ -30,6 +31,8 @@ export default function TopAlbums() {
 }
 
 function TopAlbumsContent() {
+  // TODO I did not have time to make it perfectly responsive, so I hide some elements
+  const isSmallSize = useMinBreakpoint('sm')
   const albums = useTopAlbums()
   const [search] = useSearchState()
 
@@ -52,7 +55,7 @@ function TopAlbumsContent() {
           <ListItem
             key={albumId}
             disablePadding
-            secondaryAction={<AlbumRatings albumId={albumId} />}
+            secondaryAction={isSmallSize && <AlbumRatings albumId={albumId} />}
           >
             <ListItemButton>
               <ListItemAvatar>
@@ -68,6 +71,8 @@ function TopAlbumsContent() {
 }
 
 function TopAlbumsSkeleton() {
+  // TODO I did not have time to make it perfectly responsive, so I hide some elements
+  const isSmallSize = useMinBreakpoint('sm')
   const items = new Array(10).fill(null).map((_, index) => index)
 
   return (
@@ -77,7 +82,9 @@ function TopAlbumsSkeleton() {
           <ListItem
             key={number}
             disablePadding
-            secondaryAction={<Skeleton width={115} height={30} />}
+            secondaryAction={
+              isSmallSize && <Skeleton width={115} height={30} />
+            }
           >
             <ListItemButton>
               <ListItemAvatar>
