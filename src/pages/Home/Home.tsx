@@ -1,8 +1,8 @@
 import React from 'react'
-import logo from './logo.svg'
-import styles from './App.module.scss'
+import logo from '../../assets/images/logo.svg'
+import styles from './Home.module.scss'
 
-function App() {
+function Home() {
   return (
     <div className={styles.wrapper}>
       <header className={styles.header}>
@@ -21,4 +21,4 @@ function App() {
   )
 }
 
-export default App
+export default Home
