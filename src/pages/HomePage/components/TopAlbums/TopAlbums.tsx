@@ -1,20 +1,20 @@
-import { Suspense, useCallback } from 'react'
 import {
-  ListItem,
-  Rating,
-  ListItemButton,
-  ListItemAvatar,
+  Alert,
   Avatar,
+  ListItem,
+  ListItemAvatar,
+  ListItemButton,
   ListItemText,
-  Skeleton,
-  Alert
+  Rating,
+  Skeleton
 } from '@mui/material'
-import truncate from 'lodash/truncate'
 import ErrorBoundary from 'components/ErrorBoundary'
 import Tooltip from 'components/Tooltip'
 import { useMinBreakpoint } from 'helpers/rwdHelpers'
-import { useTopAlbums, useAlbumRatings } from 'store/musicStore'
+import truncate from 'lodash/truncate'
+import { Suspense, useCallback } from 'react'
 import { useSearchState } from 'store/generalStore'
+import { useAlbumRatings, useTopAlbums } from 'store/musicStore'
 
 export default function TopAlbums() {
   return (
@@ -56,6 +56,7 @@ function TopAlbumsContent() {
         const titleMaxLength = 40
         return (
           <ListItem
+            data-testid="top-albums-item"
             key={albumId}
             disablePadding
             secondaryAction={isSmallSize && <AlbumRatings albumId={albumId} />}

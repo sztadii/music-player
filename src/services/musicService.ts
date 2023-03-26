@@ -1,7 +1,9 @@
-import axios from 'axios'
+import httpClient from './httpClient'
+
 export async function findTopAlbums(limit = 10): Promise<TopAlbumsResponse> {
-  const response = await axios.get<TopAlbumsResponse>(
-    `https://itunes.apple.com/us/rss/topalbums/limit=${limit}/json`
+  const response = await httpClient.get<TopAlbumsResponse>(
+    `https://itunes.apple.com/us/rss/topalbums/limit=${limit}/json`,
+    { retry: 3, retryDelay: 500 }
   )
   return response.data
 }

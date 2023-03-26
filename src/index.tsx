@@ -1,8 +1,10 @@
 import 'assets/styles/index.scss'
+
+import HomePage from 'pages/HomePage'
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import { RecoilRoot } from 'recoil'
-import HomePage from 'pages/HomePage'
+
 import reportWebVitals from './reportWebVitals'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)

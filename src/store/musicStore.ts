@@ -9,9 +9,7 @@ const topAlbums = selector<TopAlbumsResponse['feed']['entry']>({
   }
 })
 
-type AlbumRatings = Record<string, number>
-
-const albumsRatings = atom<AlbumRatings>({
+const albumsRatings = atom<Record<string, number>>({
   key: 'albumsRatings',
   default: {}
 })

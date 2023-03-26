@@ -1,6 +1,6 @@
-import { useCallback } from 'react'
 import { TextField } from '@mui/material'
 import debounce from 'lodash/debounce'
+import { useCallback } from 'react'
 import { useSearchState } from 'store/generalStore'
 
 export default function AlbumsSearchField() {

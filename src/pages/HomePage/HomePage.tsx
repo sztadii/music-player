@@ -1,12 +1,13 @@
-import { Typography, Divider, Container, Box } from '@mui/material'
-import TopAlbums from './components/TopAlbums'
+import { Box, Container, Divider, Typography } from '@mui/material'
+
 import AlbumsSearchField from './components/AlbumsSearchField'
+import TopAlbums from './components/TopAlbums'
 import styles from './HomePage.module.scss'
 
 export default function HomePage() {
   return (
-    <Container className={styles.wrapper} sx={{ my: 4 }}>
-      <Typography variant="h3" mb={3}>
+    <Container className={styles.wrapper}>
+      <Typography variant="h3" mb={2}>
         Top albums
       </Typography>
 
