@@ -56,6 +56,7 @@ function TopAlbumsContent() {
         const titleMaxLength = 40
         return (
           <ListItem
+            data-testid="top-albums-item"
             key={albumId}
             disablePadding
             secondaryAction={isSmallSize && <AlbumRatings albumId={albumId} />}
