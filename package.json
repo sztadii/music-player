@@ -7,6 +7,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "lint": "npm run lint-scripts && npm run lint-format",
+    "lint-scripts": "eslint \"./**/*.{ts,tsx}\" --max-warnings 0 --ignore-path .gitignore",
+    "lint-format": "prettier --ignore-path .gitignore --check \"**/*.{ts,tsx,js,json,scss}\"",
     "format": "prettier --ignore-path .gitignore --write \"**/*.{ts,tsx,js,json,scss,css}\""
   },
   "dependencies": {
@@ -25,15 +28,10 @@
     "@types/react-dom": "^18.0.11",
     "bundlesize": "^0.18.1",
     "husky": "^4.3.8",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
     "lint-staged": "^12.3.2",
     "prettier": "^2.5.1",
     "typescript": "^4.9.5"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -46,6 +44,21 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "react-app",
+      "react-app/jest",
+      "plugin:jsx-a11y/recommended"
+    ],
+    "rules": {
+      "max-lines": [
+        "error",
+        300
+      ],
+      "react-hooks/exhaustive-deps": "off"
+    }
   },
   "prettier": {
     "tabWidth": 2,
