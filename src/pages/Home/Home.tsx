@@ -1,11 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import logo from '../../assets/images/logo.svg'
 import styles from './Home.module.scss'
+import { findTopAlbums, TopAlbumsResponse } from '../../services/musicService'
 
-function Home() {
+export default function Home() {
+  const [albums, setAlbums] = useState<TopAlbumsResponse['feed']['entry']>([])
+
+  useEffect(() => {
+    async function fetchAndSaveAlbums() {
+      const response = await findTopAlbums(10)
+      setAlbums(response.feed.entry)
+    }
+
+    fetchAndSaveAlbums()
+  }, [])
+
   return (
     <div className={styles.wrapper}>
-      <header className={styles.header}>
+      <section className={styles.section}>
         <img src={logo} className={styles.logo} alt="atom logo" />
 
         <a
@@ -16,9 +28,11 @@ function Home() {
         >
           Learn React
         </a>
-      </header>
+
+        {albums.map(album => {
+          return <p key={album.id.label}>{album.title.label}</p>
+        })}
+      </section>
     </div>
   )
 }
-
-export default Home
