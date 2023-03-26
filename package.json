@@ -10,7 +10,7 @@
     "lint": "npm run lint-scripts && npm run lint-format",
     "lint-scripts": "eslint \"./**/*.{ts,tsx}\" --max-warnings 0 --ignore-path .gitignore",
     "lint-format": "prettier --ignore-path .gitignore --check \"**/*.{ts,tsx,js,json,scss}\"",
-    "format": "prettier --ignore-path .gitignore --write \"**/*.{ts,tsx,js,json,scss,css}\""
+    "format": "prettier --ignore-path .gitignore --write \"**/*.{ts,tsx,js,json,scss}\""
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -31,7 +31,8 @@
     "lint-staged": "^12.3.2",
     "prettier": "^2.5.1",
     "typescript": "^4.9.5",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "sass": "^1.49.0"
   },
   "browserslist": {
     "production": [

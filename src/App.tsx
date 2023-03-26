@@ -1,15 +1,15 @@
 import React from 'react'
 import logo from './logo.svg'
-import './App.css'
+import styles from './App.module.scss'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="atom logo" />
+    <div className={styles.wrapper}>
+      <header className={styles.header}>
+        <img src={logo} className={styles.logo} alt="atom logo" />
 
         <a
-          className="App-link"
+          className={styles.link}
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
