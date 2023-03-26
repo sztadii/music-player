@@ -9,9 +9,9 @@ import {
   Skeleton,
   Alert
 } from '@mui/material'
+import ErrorBoundary from 'components/ErrorBoundary'
 import { useTopAlbums } from 'store/musicStore'
 import { useSearchState } from 'store/generalStore'
-import ErrorBoundary from '../../../../components/ErrorBoundary'
 
 export default function TopAlbums() {
   return (
