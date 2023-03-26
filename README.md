@@ -9,3 +9,6 @@ Users can browse, search, and interact with additional features to explore the w
 npm install
 npm start
 ```
+
+## Production
+The app is deployed to the [Vercel](https://music-player-sztadii.vercel.app)
