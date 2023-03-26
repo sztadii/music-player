@@ -5,7 +5,7 @@ import styles from './HomePage.module.scss'
 
 export default function HomePage() {
   return (
-    <Container className={styles.wrapper} sx={{ my: 4 }}>
+    <Container className={styles.wrapper}>
       <Typography variant="h3" mb={3}>
         Top albums
       </Typography>
