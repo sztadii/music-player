@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import logo from '../../assets/images/logo.svg'
+import logo from 'assets/images/logo.svg'
+import { findTopAlbums, TopAlbumsResponse } from 'services/musicService'
 import styles from './Home.module.scss'
-import { findTopAlbums, TopAlbumsResponse } from '../../services/musicService'
 
 export default function Home() {
   const [albums, setAlbums] = useState<TopAlbumsResponse['feed']['entry']>([])
