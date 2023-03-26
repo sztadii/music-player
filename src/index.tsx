@@ -2,14 +2,14 @@ import 'assets/styles/index.scss'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RecoilRoot } from 'recoil'
-import Home from 'pages/Home'
+import HomePage from 'pages/HomePage'
 import reportWebVitals from './reportWebVitals'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
     <RecoilRoot>
-      <Home />
+      <HomePage />
     </RecoilRoot>
   </React.StrictMode>
 )
