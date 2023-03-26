@@ -7,7 +7,7 @@ import styles from './HomePage.module.scss'
 export default function HomePage() {
   return (
     <Container className={styles.wrapper}>
-      <Typography variant="h3" mb={3}>
+      <Typography variant="h3" mb={2}>
         Top albums
       </Typography>
 
