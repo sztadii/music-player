@@ -1,4 +1,4 @@
-import { selector, useRecoilValue } from 'recoil'
+import { atom, selector, useRecoilState, useRecoilValue } from 'recoil'
 import { findTopAlbums, TopAlbumsResponse } from 'services/musicService'
 
 const topAlbums = selector<TopAlbumsResponse['feed']['entry']>({
@@ -9,4 +9,13 @@ const topAlbums = selector<TopAlbumsResponse['feed']['entry']>({
   }
 })
 
+type AlbumRatings = Record<string, number>
+
+const albumsRatings = atom<AlbumRatings>({
+  key: 'albumsRatings',
+  default: {}
+})
+
 export const useTopAlbums = () => useRecoilValue(topAlbums)
+
+export const useAlbumRatings = () => useRecoilState(albumsRatings)

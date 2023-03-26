@@ -10,7 +10,7 @@ import {
   Alert
 } from '@mui/material'
 import ErrorBoundary from 'components/ErrorBoundary'
-import { useTopAlbums } from 'store/musicStore'
+import { useTopAlbums, useAlbumRatings } from 'store/musicStore'
 import { useSearchState } from 'store/generalStore'
 
 export default function TopAlbums() {
@@ -32,6 +32,7 @@ export default function TopAlbums() {
 function TopAlbumsContent() {
   const albums = useTopAlbums()
   const [search] = useSearchState()
+  const [ratings, setRatings] = useAlbumRatings()
 
   const filteredAlbums = search
     ? albums.filter(album =>
@@ -46,15 +47,23 @@ function TopAlbumsContent() {
   return (
     <div>
       {filteredAlbums.map(album => {
-        const id = album.id.label
+        const albumId = album.id.label
         const albumTitle = album.title.label
         return (
           <ListItem
-            key={id}
-            secondaryAction={
-              <Rating name="simple-controlled" value={0} onChange={() => {}} />
-            }
+            key={albumId}
             disablePadding
+            secondaryAction={
+              <Rating
+                value={ratings[albumId]}
+                onChange={(e, value) => {
+                  setRatings({
+                    ...ratings,
+                    [albumId]: value || 0
+                  })
+                }}
+              />
+            }
           >
             <ListItemButton>
               <ListItemAvatar>
@@ -78,8 +87,8 @@ function TopAlbumsSkeleton() {
         return (
           <ListItem
             key={number}
-            secondaryAction={<Skeleton width={115} height={30} />}
             disablePadding
+            secondaryAction={<Skeleton width={115} height={30} />}
           >
             <ListItemButton>
               <ListItemAvatar>
