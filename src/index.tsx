@@ -3,16 +3,16 @@ import 'assets/styles/index.scss'
 import HomePage from 'pages/HomePage'
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
-import { RecoilRoot } from 'recoil'
 
 import reportWebVitals from './reportWebVitals'
+import StoreProvider from './store/StoreProvider'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <StrictMode>
-    <RecoilRoot>
+    <StoreProvider>
       <HomePage />
-    </RecoilRoot>
+    </StoreProvider>
   </StrictMode>
 )
 

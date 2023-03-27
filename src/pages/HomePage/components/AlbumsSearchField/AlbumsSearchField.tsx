@@ -4,7 +4,7 @@ import { useCallback } from 'react'
 import { useSearchState } from 'store/generalStore'
 
 export default function AlbumsSearchField() {
-  const [, setSearch] = useSearchState()
+  const [search, setSearch] = useSearchState()
 
   const debouncedSetSearch = useCallback(
     debounce(value => {
@@ -18,6 +18,7 @@ export default function AlbumsSearchField() {
       fullWidth
       label="Search"
       variant="outlined"
+      defaultValue={search}
       onChange={e => {
         debouncedSetSearch(e.target.value)
       }}
