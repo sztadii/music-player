@@ -17,7 +17,9 @@ export default function HomePage() {
 
       <Divider sx={{ my: 3 }} />
 
-      <TopAlbums />
+      <div className={styles.albums}>
+        <TopAlbums />
+      </div>
     </Container>
   )
 }

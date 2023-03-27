@@ -71,6 +71,7 @@ function TopAlbumsContent() {
                   <Tooltip
                     title={albumTitle}
                     disabled={albumTitle.length < titleMaxLength}
+                    disablePortal
                   >
                     {truncate(albumTitle, { length: titleMaxLength })}
                   </Tooltip>

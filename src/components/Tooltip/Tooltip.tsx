@@ -4,6 +4,11 @@ import { ReactNode } from 'react'
 interface TooltipProps {
   title: string
   disabled?: boolean
+  // In some cases using the PortalAPI may cause overlapping with sticky elements,
+  // and in these instances, it's best to avoid using it.
+  // However, in most cases, the PortalAPI is very useful,
+  // which is why we enable portal API by default and disabled only in specific situations.
+  disablePortal?: boolean
   children: ReactNode
 }
 
@@ -13,10 +18,16 @@ interface TooltipProps {
 // In some cases, we may want to disable the tooltip,
 // but MUITooltip doesn't provide an explicit way to do so.
 export default function Tooltip(props: TooltipProps) {
-  const { children, disabled, title } = props
+  const { children, disabled, title, disablePortal } = props
 
   return (
-    <MUITooltip title={!disabled ? title : undefined} arrow>
+    <MUITooltip
+      title={!disabled ? title : undefined}
+      arrow
+      PopperProps={{
+        disablePortal
+      }}
+    >
       <span>{children}</span>
     </MUITooltip>
   )
