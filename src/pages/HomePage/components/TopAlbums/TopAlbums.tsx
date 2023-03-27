@@ -34,7 +34,7 @@ export default function TopAlbums() {
 
 function TopAlbumsContent() {
   // TODO I did not have time to make it perfectly responsive, so I hide some elements
-  const isSmallSize = useMinBreakpoint('sm')
+  const isBiggerThanSmDevice = useMinBreakpoint('sm')
   const albums = useTopAlbums()
   const [search] = useSearchState()
 
@@ -53,13 +53,15 @@ function TopAlbumsContent() {
       {filteredAlbums.map(album => {
         const albumId = album.id.label
         const albumTitle = album.title.label
-        const titleMaxLength = 40
+        const titleMaxLength = isBiggerThanSmDevice ? 40 : 25
         return (
           <ListItem
             data-testid="top-albums-item"
             key={albumId}
             disablePadding
-            secondaryAction={isSmallSize && <AlbumRatings albumId={albumId} />}
+            secondaryAction={
+              isBiggerThanSmDevice && <AlbumRatings albumId={albumId} />
+            }
           >
             <ListItemButton>
               <ListItemAvatar>
@@ -87,7 +89,7 @@ function TopAlbumsContent() {
 
 function TopAlbumsSkeleton() {
   // TODO I did not have time to make it perfectly responsive, so I hide some elements
-  const isSmallSize = useMinBreakpoint('sm')
+  const isBiggerThanSmDevice = useMinBreakpoint('sm')
   const items = new Array(10).fill(null).map((_, index) => index)
 
   return (
@@ -98,7 +100,7 @@ function TopAlbumsSkeleton() {
             key={number}
             disablePadding
             secondaryAction={
-              isSmallSize && <Skeleton width={115} height={30} />
+              isBiggerThanSmDevice && <Skeleton width={115} height={30} />
             }
           >
             <ListItemButton>
