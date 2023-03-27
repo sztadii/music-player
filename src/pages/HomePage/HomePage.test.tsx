@@ -1,26 +1,11 @@
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from 'helpers/testsHelpers'
-import { rest } from 'msw'
-import { setupServer } from 'msw/node'
+import { getHttpMocker, renderWithProviders } from 'helpers/testsHelpers'
 
 import HomePage from './HomePage'
 
 describe('HomePage', () => {
-  let server: ReturnType<typeof setupServer>
-
-  beforeAll(() => {
-    server = setupServer()
-    server.listen()
-  })
-
-  afterEach(() => {
-    server.resetHandlers()
-  })
-
-  afterAll(() => {
-    server.close()
-  })
+  const httpMocker = getHttpMocker()
 
   it('displays top albums from iTunes', async () => {
     const albumsMock = {
@@ -44,14 +29,12 @@ describe('HomePage', () => {
       }
     }
 
-    server.use(
-      rest.get(
-        'https://itunes.apple.com/us/rss/topalbums/limit=100/json',
-        (req, res, ctx) => {
-          return res(ctx.status(200), ctx.json(albumsMock))
-        }
-      )
-    )
+    httpMocker.mock({
+      url: 'https://itunes.apple.com/us/rss/topalbums/limit=100/json',
+      method: 'get',
+      status: 200,
+      body: albumsMock
+    })
     renderWithProviders(<HomePage />)
 
     expect(await screen.findByText('Thunderstruck')).toBeVisible()
@@ -80,14 +63,12 @@ describe('HomePage', () => {
       }
     }
 
-    server.use(
-      rest.get(
-        'https://itunes.apple.com/us/rss/topalbums/limit=100/json',
-        (req, res, ctx) => {
-          return res(ctx.status(200), ctx.json(albumsMock))
-        }
-      )
-    )
+    httpMocker.mock({
+      url: 'https://itunes.apple.com/us/rss/topalbums/limit=100/json',
+      method: 'get',
+      status: 200,
+      body: albumsMock
+    })
     renderWithProviders(<HomePage />)
 
     await waitFor(() => {
@@ -105,14 +86,11 @@ describe('HomePage', () => {
   })
 
   it('displays error message when iTunes service is unavailable', async () => {
-    server.use(
-      rest.get(
-        'https://itunes.apple.com/us/rss/topalbums/limit=100/json',
-        (req, res, ctx) => {
-          return res(ctx.status(500))
-        }
-      )
-    )
+    httpMocker.mock({
+      url: 'https://itunes.apple.com/us/rss/topalbums/limit=100/json',
+      method: 'get',
+      status: 500
+    })
 
     renderWithProviders(<HomePage />)
 
