@@ -6,7 +6,8 @@ import {
   ListItemButton,
   ListItemText,
   Rating,
-  Skeleton
+  Skeleton,
+  Typography
 } from '@mui/material'
 import ErrorBoundary from 'components/ErrorBoundary'
 import Tooltip from 'components/Tooltip'
@@ -72,10 +73,18 @@ function TopAlbumsContent() {
                 primary={
                   <Tooltip
                     title={albumTitle}
-                    disabled={albumTitle.length < titleMaxLength}
+                    disabled={
+                      isBiggerThanSmDevice
+                        ? albumTitle.length < titleMaxLength
+                        : false
+                    }
                     disablePortal
                   >
-                    {truncate(albumTitle, { length: titleMaxLength })}
+                    {isBiggerThanSmDevice ? (
+                      truncate(albumTitle, { length: titleMaxLength })
+                    ) : (
+                      <Typography noWrap>{albumTitle}</Typography>
+                    )}
                   </Tooltip>
                 }
               />
