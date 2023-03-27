@@ -1,6 +1,7 @@
 import {
   Alert,
   Avatar,
+  Box,
   ListItem,
   ListItemAvatar,
   ListItemButton,
@@ -114,19 +115,26 @@ function TopAlbumsSkeleton() {
   return (
     <div>
       {items.map(number => {
+        const randomisedSkeletonTextWidth = Math.random() > 0.5 ? 220 : 160
         return (
           <ListItem
             key={number}
             disablePadding
             secondaryAction={
-              isBiggerThanSmDevice && <Skeleton width={115} height={30} />
+              isBiggerThanSmDevice && (
+                <Box display="flex" alignItems="center" gap={0.7}>
+                  {new Array(5).fill(null).map(() => (
+                    <Skeleton variant="circular" width={19} height={19} />
+                  ))}
+                </Box>
+              )
             }
           >
             <ListItemButton>
               <ListItemAvatar>
                 <Skeleton variant="circular" width={40} height={40} />
               </ListItemAvatar>
-              <Skeleton variant="text" width={200} />
+              <Skeleton variant="text" width={randomisedSkeletonTextWidth} />
             </ListItemButton>
           </ListItem>
         )
