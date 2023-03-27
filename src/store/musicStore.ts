@@ -1,4 +1,6 @@
-import { getFromLocalStorage } from 'helpers/storageHelpers'
+import { getFromLocalStorage, setToLocalStorage } from 'helpers/storageHelpers'
+import isNull from 'lodash/isNull'
+import omitBy from 'lodash/omitBy'
 import { atom, selector, useRecoilState, useRecoilValue } from 'recoil'
 import { findTopAlbums, TopAlbumsResponse } from 'services/musicService'
 
@@ -10,9 +12,17 @@ const topAlbums = selector<TopAlbumsResponse['feed']['entry']>({
   }
 })
 
-const albumsRatings = atom<Record<string, number>>({
+const albumsRatings = atom<Record<string, number | null>>({
   key: 'albumsRatings',
-  default: getFromLocalStorage('albumsRatings') || {}
+  default: getFromLocalStorage('albumsRatings') || {},
+  effects: [
+    ({ onSet }) => {
+      onSet(albumsRatings => {
+        const albumsWithNonNullValues = omitBy(albumsRatings, isNull)
+        setToLocalStorage('albumsRatings', albumsWithNonNullValues)
+      })
+    }
+  ]
 })
 
 export const useTopAlbums = () => useRecoilValue(topAlbums)
