@@ -1,9 +1,12 @@
-import { TextField, TextFieldProps } from '@mui/material'
+import { TextField as MUITextField, TextFieldProps } from '@mui/material'
 
 import styles from './TextField.module.scss'
 
-export default function AlbumsSearchField(props: TextFieldProps) {
+export default function TextField(props: TextFieldProps) {
   return (
-    <TextField {...props} className={`${styles.wrapper} ${props.className}`} />
+    <MUITextField
+      {...props}
+      className={`${styles.wrapper} ${props.className}`}
+    />
   )
 }
