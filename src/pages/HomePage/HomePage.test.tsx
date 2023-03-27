@@ -7,7 +7,7 @@ import HomePage from './HomePage'
 describe('HomePage', () => {
   const httpMocker = getHttpMocker()
 
-  it('displays top albums from iTunes', async () => {
+  it('displays top albums', async () => {
     const albumsMock = {
       feed: {
         entry: [
@@ -41,7 +41,7 @@ describe('HomePage', () => {
     expect(await screen.findByText('Back in Black')).toBeVisible()
   })
 
-  it('filter top albums from iTunes', async () => {
+  it('filter top albums', async () => {
     const albumsMock = {
       feed: {
         entry: [
@@ -98,4 +98,6 @@ describe('HomePage', () => {
       await screen.findByText('Something went wrong with top albums service :(')
     ).toBeVisible()
   })
+
+  it.todo('rate albums')
 })
