@@ -129,7 +129,7 @@ describe('HomePage', () => {
     expect(await screen.findByText('Hotline Bling')).toBeVisible()
   })
 
-  it('displays error message when iTunes service is unavailable', async () => {
+  it('displays error message when iTunes service is down', async () => {
     httpMocker.mock({
       url: 'https://itunes.apple.com/us/rss/topalbums/limit=100/json',
       method: 'get',
@@ -142,6 +142,25 @@ describe('HomePage', () => {
       await screen.findByText('Something went wrong with top albums service :(')
     ).toBeVisible()
   })
+
+  it('displays error message when iTunes service timeout', async () => {
+    httpMocker.mock({
+      url: 'https://itunes.apple.com/us/rss/topalbums/limit=100/json',
+      method: 'get',
+      delay: 6_000,
+      status: 200
+    })
+
+    renderWithProviders(<HomePage />)
+
+    expect(
+      await screen.findByText(
+        'Something went wrong with top albums service :(',
+        undefined,
+        { timeout: 6_000 }
+      )
+    ).toBeVisible()
+  }, 10_000)
 
   it.todo('rate albums')
 })
