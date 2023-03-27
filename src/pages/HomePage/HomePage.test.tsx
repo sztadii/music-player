@@ -1,5 +1,6 @@
-import { screen, waitFor } from '@testing-library/react'
+import { screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { getFromLocalStorage } from 'helpers/storageHelpers'
 import {
   getHttpMocker,
   renderWithProviders,
@@ -10,6 +11,11 @@ import HomePage from './HomePage'
 
 describe('HomePage', () => {
   const httpMocker = getHttpMocker()
+
+  beforeEach(() => {
+    updateBrowserURL('/')
+    localStorage.clear()
+  })
 
   it('displays top albums', async () => {
     const albumsMock = {
@@ -162,5 +168,61 @@ describe('HomePage', () => {
     ).toBeVisible()
   }, 10_000)
 
-  it.todo('rate albums')
+  it('rate albums', async () => {
+    const albumsMock = {
+      feed: {
+        entry: [
+          {
+            'im:image': [{ label: 'https://rihanna.com/umbrella' }],
+            title: { label: 'Umbrella' },
+            id: {
+              label: 'umbrella-id'
+            }
+          },
+          {
+            'im:image': [{ label: 'https://rihanna.com/fire' }],
+            title: { label: 'Fire' },
+            id: {
+              label: 'fire-id'
+            }
+          }
+        ]
+      }
+    }
+
+    httpMocker.mock({
+      url: 'https://itunes.apple.com/us/rss/topalbums/limit=100/json',
+      method: 'get',
+      status: 200,
+      body: albumsMock
+    })
+
+    renderWithProviders(<HomePage />)
+
+    const firstAlbumRating = await screen.findByTestId(
+      'AlbumRatings-umbrella-id'
+    )
+    const secondAlbumRating = await screen.findByTestId('AlbumRatings-fire-id')
+
+    userEvent.click(within(firstAlbumRating).getByText('2 Stars'))
+    expect(getFromLocalStorage('albumsRatings')).toEqual({ 'umbrella-id': 2 })
+
+    userEvent.click(within(firstAlbumRating).getByText('5 Stars'))
+    expect(getFromLocalStorage('albumsRatings')).toEqual({ 'umbrella-id': 5 })
+
+    userEvent.click(within(secondAlbumRating).getByText('3 Stars'))
+    expect(getFromLocalStorage('albumsRatings')).toEqual({
+      'fire-id': 3,
+      'umbrella-id': 5
+    })
+
+    // TODO Find a way to un-click the same star to remove rating
+    // userEvent.click(within(secondAlbumRating).getByText('3 Stars'))
+    //
+    // await waitFor(() => {
+    //   expect(getFromLocalStorage('albumsRatings')).toEqual({
+    //     'umbrella-id': 5
+    //   })
+    // })
+  })
 })

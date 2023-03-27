@@ -5,7 +5,6 @@ import {
   ListItemAvatar,
   ListItemButton,
   ListItemText,
-  Rating,
   Skeleton,
   Typography
 } from '@mui/material'
@@ -13,9 +12,11 @@ import ErrorBoundary from 'components/ErrorBoundary'
 import Tooltip from 'components/Tooltip'
 import { useMinBreakpoint } from 'helpers/rwdHelpers'
 import truncate from 'lodash/truncate'
-import { Suspense, useCallback } from 'react'
+import { Suspense } from 'react'
 import { useSearchState } from 'store/generalStore'
-import { useAlbumRatings, useTopAlbums } from 'store/musicStore'
+import { useTopAlbums } from 'store/musicStore'
+
+import AlbumRatings from '../AlbumRatings'
 
 export default function TopAlbums() {
   return (
@@ -61,7 +62,11 @@ function TopAlbumsContent() {
             key={albumId}
             disablePadding
             secondaryAction={
-              isBiggerThanSmDevice && <AlbumRatings albumId={albumId} />
+              <div
+                style={{ display: isBiggerThanSmDevice ? undefined : 'none' }}
+              >
+                <AlbumRatings albumId={albumId} />
+              </div>
             }
           >
             <ListItemButton>
@@ -123,22 +128,4 @@ function TopAlbumsSkeleton() {
       })}
     </div>
   )
-}
-
-interface AlbumRatingsProps {
-  albumId: string
-}
-
-function AlbumRatings(props: AlbumRatingsProps) {
-  const { albumId } = props
-  const [ratings, setRatings] = useAlbumRatings()
-
-  const updateRatings = useCallback((e: unknown, value: number | null) => {
-    setRatings({
-      ...ratings,
-      [albumId]: value || 0
-    })
-  }, [])
-
-  return <Rating value={ratings[albumId]} onChange={updateRatings} />
 }
