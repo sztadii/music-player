@@ -1,6 +1,10 @@
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { getHttpMocker, renderWithProviders } from 'helpers/testsHelpers'
+import {
+  getHttpMocker,
+  renderWithProviders,
+  updateBrowserURL
+} from 'helpers/testsHelpers'
 
 import HomePage from './HomePage'
 
@@ -77,6 +81,46 @@ describe('HomePage', () => {
 
     userEvent.click(screen.getByLabelText('Search'))
     userEvent.keyboard('Hot')
+
+    await waitFor(() => {
+      expect(screen.queryAllByTestId('top-albums-item')).toHaveLength(1)
+    })
+
+    expect(await screen.findByText('Hotline Bling')).toBeVisible()
+  })
+
+  it('filter top albums by search param in URL', async () => {
+    const albumsMock = {
+      feed: {
+        entry: [
+          {
+            'im:image': [{ label: 'https://drake.com/onedance' }],
+            title: { label: 'One Dance' },
+            id: {
+              label: 'id label'
+            }
+          },
+          {
+            'im:image': [{ label: 'https://drake.com/hotlinebling' }],
+            title: { label: 'Hotline Bling' },
+            id: {
+              label: 'id 2 label'
+            }
+          }
+        ]
+      }
+    }
+
+    httpMocker.mock({
+      url: 'https://itunes.apple.com/us/rss/topalbums/limit=100/json',
+      method: 'get',
+      status: 200,
+      body: albumsMock
+    })
+
+    updateBrowserURL('/?search="hotline"')
+
+    renderWithProviders(<HomePage />)
 
     await waitFor(() => {
       expect(screen.queryAllByTestId('top-albums-item')).toHaveLength(1)

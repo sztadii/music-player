@@ -1,7 +1,12 @@
 import { render } from '@testing-library/react'
 import HttpRequestMock from 'http-request-mock'
 import { ReactElement, ReactNode } from 'react'
-import { RecoilRoot, selector, snapshot_UNSTABLE } from 'recoil'
+import { selector, snapshot_UNSTABLE } from 'recoil'
+import StoreProvider from 'store/StoreProvider'
+
+export function updateBrowserURL(url: string) {
+  window.history.replaceState(null, '', url)
+}
 
 export function getHttpMocker() {
   return HttpRequestMock.setup()
@@ -10,10 +15,10 @@ export function getHttpMocker() {
 // Keep this as a helper function, because in larger applications we have many other providers,
 // and we don't want to duplicate this code in each test
 export function renderWithProviders(component: ReactElement) {
-  return render(<RecoilRootForTesting>{component}</RecoilRootForTesting>)
+  return render(<StoreProviderForTesting>{component}</StoreProviderForTesting>)
 }
 
-function RecoilRootForTesting(props: { children: ReactNode }) {
+function StoreProviderForTesting(props: { children: ReactNode }) {
   // clearSelectorCachesState looks very ugly, but it is only way to clean the recoil global state
   // https://recoiljs.org/docs/guides/testing#clearing-all-selector-caches
   const clearSelectorCachesState = selector({
@@ -31,5 +36,5 @@ function RecoilRootForTesting(props: { children: ReactNode }) {
   const snapshot = snapshot_UNSTABLE()
   snapshot.getLoadable(clearSelectorCachesState).getValue()()
 
-  return <RecoilRoot>{props.children}</RecoilRoot>
+  return <StoreProvider>{props.children}</StoreProvider>
 }
