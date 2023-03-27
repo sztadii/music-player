@@ -11,7 +11,7 @@ export default function HomePage() {
         Top albums
       </Typography>
 
-      <Box mb={3}>
+      <Box mb={3} className={styles.search}>
         <AlbumsSearchField />
       </Box>
 

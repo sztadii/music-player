@@ -79,7 +79,7 @@ describe('HomePage', () => {
       expect(screen.queryAllByTestId('top-albums-item')).toHaveLength(2)
     })
 
-    userEvent.click(screen.getByLabelText('Search'))
+    userEvent.click(screen.getByLabelText('Search albums'))
     userEvent.keyboard('Hot')
 
     await waitFor(() => {
