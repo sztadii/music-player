@@ -1,6 +1,4 @@
 import { Rating } from '@mui/material'
-import { setToLocalStorage } from 'helpers/storageHelpers'
-import omit from 'lodash/omit'
 import { useCallback } from 'react'
 import { useAlbumRatings } from 'store/musicStore'
 
@@ -14,12 +12,8 @@ export default function AlbumRatings(props: AlbumRatingsProps) {
 
   const updateRatings = useCallback(
     (e: unknown, value: number | null) => {
-      const newRatings = value
-        ? { ...ratings, [albumId]: value }
-        : omit(ratings, [albumId])
-
+      const newRatings = { ...ratings, [albumId]: value }
       setRatings(newRatings)
-      setToLocalStorage('albumsRatings', newRatings)
     },
     [ratings]
   )
