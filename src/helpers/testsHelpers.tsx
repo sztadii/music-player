@@ -1,6 +1,11 @@
 import { render } from '@testing-library/react'
+import HttpRequestMock from 'http-request-mock'
 import { ReactElement, ReactNode } from 'react'
 import { RecoilRoot, selector, snapshot_UNSTABLE } from 'recoil'
+
+export function getHttpMocker() {
+  return HttpRequestMock.setup()
+}
 
 // Keep this as a helper function, because in larger applications we have many other providers,
 // and we don't want to duplicate this code in each test
