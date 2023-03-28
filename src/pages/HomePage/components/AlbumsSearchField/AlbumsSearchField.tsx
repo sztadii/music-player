@@ -1,7 +1,7 @@
 import TextField from 'components/TextField'
 import debounce from 'lodash/debounce'
 import { useCallback } from 'react'
-import { useSearchState } from 'store/generalStore'
+import { useSearchState } from 'stores/generalStore'
 
 export default function AlbumsSearchField() {
   const [search, setSearch] = useSearchState()

@@ -15,8 +15,8 @@ import Tooltip from 'components/Tooltip'
 import { useMinBreakpoint } from 'helpers/rwdHelpers'
 import truncate from 'lodash/truncate'
 import { Suspense } from 'react'
-import { useSearchState } from 'store/generalStore'
-import { useTopAlbums } from 'store/musicStore'
+import { useSearchState } from 'stores/generalStore'
+import { useTopAlbums } from 'stores/musicStore'
 
 import AlbumRatings from '../AlbumRatings'
 

@@ -5,7 +5,7 @@ import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 
 import reportWebVitals from './reportWebVitals'
-import StoreProvider from './store/StoreProvider'
+import StoreProvider from './stores/StoreProvider'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
