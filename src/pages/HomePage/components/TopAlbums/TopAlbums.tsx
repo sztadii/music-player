@@ -9,7 +9,6 @@ import {
   Skeleton,
   Typography
 } from '@mui/material'
-import { grey } from '@mui/material/colors'
 import ErrorBoundary from 'components/ErrorBoundary'
 import Tooltip from 'components/Tooltip'
 import { useMinBreakpoint } from 'helpers/rwdHelpers'
@@ -74,7 +73,7 @@ function TopAlbumsContent() {
             <ListItemButton>
               <ListItemAvatar>
                 <Avatar
-                  style={{ backgroundColor: grey[300] }}
+                  sx={{ backgroundColor: 'grey.300' }}
                   alt="Avatar img"
                   src={album['im:image'][0].label}
                 />
