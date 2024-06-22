@@ -1,8 +1,4 @@
 # music-player
-This web app allows users to explore a wide range of albums based on the iTunes API. <br>
-Featuring a clean, modern design and responsive layout. <br>
-Built with TypeScript, React, Recoil, and a CSS framework. <br>
-Users can browse, search, and interact with additional features to explore the world of music.
 
 ### How to run
 ```
@@ -10,13 +6,7 @@ npm install
 npm start
 ```
 
-### Production
-[Link to production](https://music-player-sztadii.vercel.app)
-
-<br />
-<br />
-
-# Task
+### Task description
 In a fictional world, we are branching into the music business and we need a new web app.
 This website needs to display the top 100 albums based on the iTunes API. This code
 challenge allows you to choose your own path and lets you flaunt your creative panache
