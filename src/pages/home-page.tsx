@@ -1,7 +1,8 @@
 import { Container, Divider, Typography } from '@mui/material'
-import AlbumsSearchField from 'components-connected/albums-search-field'
-import TopAlbums from 'components-connected/top-albums'
 import styled from 'styled-components'
+
+import AlbumsSearchField from 'src/components-connected/albums-search-field'
+import TopAlbums from 'src/components-connected/top-albums'
 
 export default function HomePage() {
   return (
