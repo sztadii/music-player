@@ -2,7 +2,7 @@ import { render } from '@testing-library/react'
 import HttpRequestMock from 'http-request-mock'
 import { ReactElement, ReactNode } from 'react'
 import { selector, snapshot_UNSTABLE } from 'recoil'
-import StoreProvider from 'stores/StoreProvider'
+import StoreProvider from 'stores/store-provider'
 
 export function updateBrowserURL(url: string) {
   window.history.replaceState(null, '', url)

@@ -1,4 +1,4 @@
-import httpService from './httpService'
+import httpService from './http-service'
 
 export async function findTopAlbums(limit = 10): Promise<TopAlbumsResponse> {
   const response = await httpService.get<TopAlbumsResponse>(
