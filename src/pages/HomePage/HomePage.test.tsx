@@ -14,7 +14,6 @@ describe('HomePage', () => {
 
   beforeEach(() => {
     updateBrowserURL('/')
-    localStorage.clear()
   })
 
   it('displays top albums', async () => {
