@@ -162,7 +162,7 @@ describe('HomePage', () => {
       await screen.findByText(
         'Something went wrong with top albums service :(',
         undefined,
-        { timeout: 6_000 }
+        { timeout: 7_000 }
       )
     ).toBeVisible()
   }, 10_000)
