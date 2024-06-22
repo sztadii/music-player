@@ -17,7 +17,7 @@ import { Suspense } from 'react'
 import { useSearchState } from 'stores/generalStore'
 import { useTopAlbums } from 'stores/musicStore'
 
-import AlbumRatings from '../AlbumRatings'
+import AlbumRatings from './AlbumRatings'
 
 export default function TopAlbums() {
   return (
