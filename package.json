@@ -6,7 +6,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "CI=true react-scripts test --silent",
-    "eject": "react-scripts eject",
     "lint": "npm run lint-scripts && npm run lint-styles && npm run lint-format",
     "lint-styles": "stylelint --max-warnings 0 \"**/*.scss\"",
     "lint-scripts": "eslint \"./**/*.{ts,tsx}\" --max-warnings 0 --ignore-path .gitignore",
