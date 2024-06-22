@@ -9,6 +9,7 @@
     "lint": "npm run lint-scripts && npm run lint-styles && npm run lint-format",
     "lint-styles": "stylelint --max-warnings 0 \"**/*.scss\"",
     "lint-scripts": "eslint \"./**/*.{ts,tsx}\" --max-warnings 0 --ignore-path .gitignore",
+    "lint-scripts-fix": "eslint \"./**/*.{ts,tsx}\" --fix --max-warnings 0 --ignore-path .gitignore",
     "lint-format": "prettier --ignore-path .gitignore --check \"**/*.{ts,tsx,js,json,scss}\"",
     "format": "prettier --ignore-path .gitignore --write \"**/*.{ts,tsx,js,json,scss}\""
   },
