@@ -1,4 +1,4 @@
-import 'assets/styles/index.scss'
+import './index.scss'
 
 import HomePage from 'pages/HomePage'
 import { StrictMode } from 'react'
