@@ -1,8 +1,8 @@
-import { getFromLocalStorage, setToLocalStorage } from 'helpers/storageHelpers'
+import { getFromLocalStorage, setToLocalStorage } from 'helpers/storage-helpers'
 import isNull from 'lodash/isNull'
 import omitBy from 'lodash/omitBy'
 import { atom, selector, useRecoilState, useRecoilValue } from 'recoil'
-import { findTopAlbums, TopAlbumsResponse } from 'services/musicService'
+import { findTopAlbums, TopAlbumsResponse } from 'services/music-service'
 
 const topAlbums = selector<TopAlbumsResponse['feed']['entry']>({
   key: 'topAlbums',

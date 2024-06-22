@@ -9,15 +9,15 @@ import {
   Skeleton,
   Typography
 } from '@mui/material'
-import ErrorBoundary from 'components/ErrorBoundary'
-import Tooltip from 'components/Tooltip'
-import { useMinBreakpoint } from 'helpers/rwdHelpers'
+import ErrorBoundary from 'components/error-boundary'
+import Tooltip from 'components/tooltip'
+import { useMinBreakpoint } from 'helpers/rwd-helpers'
 import truncate from 'lodash/truncate'
 import { Suspense } from 'react'
-import { useSearchState } from 'stores/generalStore'
-import { useTopAlbums } from 'stores/musicStore'
+import { useSearchState } from 'stores/general-store'
+import { useTopAlbums } from 'stores/music-store'
 
-import AlbumRatings from './AlbumRatings'
+import AlbumRatings from './album-ratings'
 
 export default function TopAlbums() {
   return (

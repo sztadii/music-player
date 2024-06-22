@@ -1,14 +1,14 @@
 import { screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { getFromLocalStorage } from 'helpers/storageHelpers'
+import { getFromLocalStorage } from 'helpers/storage-helpers'
 import {
   getHttpMocker,
   renderWithProviders,
   updateBrowserURL
-} from 'helpers/testsHelpers'
-import { TopAlbumsResponse } from 'services/musicService'
+} from 'helpers/tests-helpers'
+import { TopAlbumsResponse } from 'services/music-service'
 
-import HomePage from './HomePage'
+import HomePage from './home-page'
 
 describe('HomePage', () => {
   const httpMocker = getHttpMocker()

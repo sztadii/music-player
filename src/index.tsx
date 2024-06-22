@@ -1,11 +1,11 @@
 import './index.scss'
 
-import HomePage from 'pages/HomePage'
+import HomePage from 'pages/home-page'
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 
-import reportWebVitals from './reportWebVitals'
-import StoreProvider from './stores/StoreProvider'
+import reportWebVitals from './report-web-vitals'
+import StoreProvider from './stores/store-provider'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(

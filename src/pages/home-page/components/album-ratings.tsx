@@ -1,6 +1,6 @@
 import { Rating } from '@mui/material'
 import { useCallback } from 'react'
-import { useAlbumRatings } from 'stores/musicStore'
+import { useAlbumRatings } from 'stores/music-store'
 
 interface AlbumRatingsProps {
   albumId: string
