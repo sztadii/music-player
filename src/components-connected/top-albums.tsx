@@ -9,13 +9,14 @@ import {
   Skeleton,
   Typography
 } from '@mui/material'
-import ErrorBoundary from 'components/error-boundary'
-import Tooltip from 'components/tooltip'
-import { useMinBreakpoint } from 'helpers/rwd-helpers'
 import truncate from 'lodash/truncate'
 import { Suspense } from 'react'
-import { useSearchState } from 'stores/general-store'
-import { useTopAlbums } from 'stores/music-store'
+
+import ErrorBoundary from 'src/components/error-boundary'
+import Tooltip from 'src/components/tooltip'
+import { useMinBreakpoint } from 'src/helpers/rwd-helpers'
+import { useSearchState } from 'src/stores/general-store'
+import { useTopAlbums } from 'src/stores/music-store'
 
 import AlbumRatings from './album-ratings'
 

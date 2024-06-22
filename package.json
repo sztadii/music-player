@@ -31,6 +31,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/jest": "^27.5.2",
     "@types/lodash": "^4.14.191",
     "@types/node": "^16.18.21",
@@ -38,7 +39,6 @@
     "@types/react-dom": "^18.0.11",
     "bundlesize": "^0.18.1",
     "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-simple-import-sort": "^10.0.0",
     "http-request-mock": "^1.8.14",
     "husky": "^4.3.8",
     "lint-staged": "^12.3.2",
@@ -73,17 +73,12 @@
       "react-app/jest",
       "plugin:jsx-a11y/recommended"
     ],
-    "plugins": [
-      "simple-import-sort"
-    ],
     "rules": {
       "max-lines": [
         "error",
         300
       ],
-      "react-hooks/exhaustive-deps": "off",
-      "simple-import-sort/imports": "error",
-      "simple-import-sort/exports": "error"
+      "react-hooks/exhaustive-deps": "off"
     }
   },
   "stylelint": {
@@ -94,7 +89,16 @@
     "singleQuote": true,
     "trailingComma": "none",
     "semi": false,
-    "arrowParens": "avoid"
+    "arrowParens": "avoid",
+    "plugins": [
+      "@trivago/prettier-plugin-sort-imports"
+    ],
+    "importOrder": [
+      "^src/(.*)$",
+      "^[./]"
+    ],
+    "importOrderSeparation": true,
+    "importOrderSortSpecifiers": true
   },
   "husky": {
     "hooks": {

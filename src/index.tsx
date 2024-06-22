@@ -1,9 +1,9 @@
-import './index.scss'
-
-import HomePage from 'pages/home-page'
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 
+import HomePage from 'src/pages/home-page'
+
+import './index.scss'
 import reportWebVitals from './report-web-vitals'
 import StoreProvider from './stores/store-provider'
 
