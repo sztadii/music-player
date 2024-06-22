@@ -7,3 +7,9 @@ declare module 'axios' {
     retryDelay?: number
   }
 }
+
+declare global {
+  type DeepPartial<T> = {
+    [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P]
+  }
+}

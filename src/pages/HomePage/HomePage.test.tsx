@@ -6,6 +6,7 @@ import {
   renderWithProviders,
   updateBrowserURL
 } from 'helpers/testsHelpers'
+import { TopAlbumsResponse } from 'services/musicService'
 
 import HomePage from './HomePage'
 
@@ -17,7 +18,7 @@ describe('HomePage', () => {
   })
 
   it('displays top albums', async () => {
-    const albumsMock = {
+    const albumsMock: DeepPartial<TopAlbumsResponse> = {
       feed: {
         entry: [
           {
@@ -51,7 +52,7 @@ describe('HomePage', () => {
   })
 
   it('filter top albums', async () => {
-    const albumsMock = {
+    const albumsMock: DeepPartial<TopAlbumsResponse> = {
       feed: {
         entry: [
           {
@@ -95,7 +96,7 @@ describe('HomePage', () => {
   })
 
   it('filter top albums by search param in URL', async () => {
-    const albumsMock = {
+    const albumsMock: DeepPartial<TopAlbumsResponse> = {
       feed: {
         entry: [
           {
