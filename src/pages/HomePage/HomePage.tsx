@@ -1,25 +1,42 @@
-import { Box, Container, Divider, Typography } from '@mui/material'
+import { Container, Divider, Typography } from '@mui/material'
+import styled from 'styled-components'
 
 import AlbumsSearchField from './components/AlbumsSearchField'
 import TopAlbums from './components/TopAlbums'
-import styles from './HomePage.module.scss'
 
 export default function HomePage() {
   return (
-    <Container className={styles.wrapper}>
+    <ContainerStyled>
       <Typography variant="h3" mb={2}>
         Top albums
       </Typography>
 
-      <Box mb={3} className={styles.search}>
+      <SearchBox>
         <AlbumsSearchField />
-      </Box>
+      </SearchBox>
 
       <Divider sx={{ my: 3 }} />
 
-      <div className={styles.albums}>
+      <AlbumsBox>
         <TopAlbums />
-      </div>
-    </Container>
+      </AlbumsBox>
+    </ContainerStyled>
   )
 }
+
+const ContainerStyled = styled(Container)`
+  margin-top: 2rem;
+`
+
+const SearchBox = styled.div`
+  margin-bottom: 2rem;
+  position: sticky;
+  top: 1rem;
+  background: white;
+  z-index: 2;
+`
+
+const AlbumsBox = styled.div`
+  position: relative;
+  z-index: 1;
+`
