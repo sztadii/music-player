@@ -3,7 +3,7 @@ import { useCallback } from 'react'
 
 import { useAlbumRatings } from 'src/stores/music-store'
 
-interface AlbumRatingsProps {
+type AlbumRatingsProps = {
   albumId: string
 }
 

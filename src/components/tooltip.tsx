@@ -1,7 +1,7 @@
 import { Tooltip as MUITooltip } from '@mui/material'
 import { ReactNode } from 'react'
 
-interface TooltipProps {
+type TooltipProps = {
   title: string
   /**
    * In some cases, we may want to disable the tooltip,
