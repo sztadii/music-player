@@ -7,7 +7,7 @@
     "build": "react-scripts build",
     "test": "CI=true react-scripts test --silent",
     "lint": "npm run lint-scripts && npm run lint-styles && npm run lint-format && npm run lint-file-names",
-    "lint-file-names": "file-naming-enforcer type=kebabCase folder=./src",
+    "lint-file-names": "file-naming-enforcer type=kebabCase folder=./src ignore=[setupTests.ts]",
     "lint-styles": "stylelint --max-warnings 0 \"**/*.scss\"",
     "lint-scripts": "eslint \"./**/*.{ts,tsx}\" --max-warnings 0 --ignore-path .gitignore",
     "lint-scripts-fix": "eslint \"./**/*.{ts,tsx}\" --fix --max-warnings 0 --ignore-path .gitignore",
