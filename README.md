@@ -7,14 +7,13 @@ challenge allows you to choose your own path and lets you flaunt your creative p
 and technical skills along the way.
 
 ### Requirements
-- Implement assignment using:
 - Framework: React
-- State Management: Recoil
+- State Management: **Recoil**
 - Show top 100 albums based on the json feed here:
   https://itunes.apple.com/us/rss/topalbums/limit=100/json
 - Allow the top 100 to be searchable
 
-### Evaluation Criteria
+### Evaluation criteria
 - We're looking for production level code
 - Show us your work through your commit history
 - Completeness: did you complete the features?
