@@ -13,14 +13,6 @@ and technical skills along the way.
   https://itunes.apple.com/us/rss/topalbums/limit=100/json
 - Allow the top 100 to be searchable
 
-### Evaluation criteria
-- We're looking for production level code
-- Show us your work through your commit history
-- Completeness: did you complete the features?
-- Correctness: does the functionality act in sensible, thought-out ways?
-- Maintainability: is it written in a clean, maintainable way?
-- Testing: is the system adequately tested?
-
 ## How to run
 ```
 npm install
