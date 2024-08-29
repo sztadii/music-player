@@ -7,12 +7,7 @@ import { useSearchState } from 'src/hooks/use-search-state'
 export default function AlbumsSearchField() {
   const [search, setSearch] = useSearchState()
 
-  const debouncedSetSearch = useCallback(
-    debounce(value => {
-      setSearch(value)
-    }, 500),
-    []
-  )
+  const debouncedSetSearch = useCallback(debounce(setSearch, 500), [])
 
   return (
     <TextField
