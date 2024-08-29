@@ -1,8 +1,12 @@
-import { Container, Divider, Typography } from '@mui/material'
+import { Alert, Container, Divider, Typography } from '@mui/material'
 import styled from 'styled-components'
 
 import AlbumsSearchField from 'src/components-connected/albums-search-field'
-import TopAlbums from 'src/components-connected/top-albums'
+import {
+  TopAlbums,
+  TopAlbumsSkeleton
+} from 'src/components-connected/top-albums'
+import AsyncWrapper from 'src/components/async-wrapper'
 
 export default function HomePage() {
   return (
@@ -18,7 +22,16 @@ export default function HomePage() {
       <Divider sx={{ my: 3 }} />
 
       <AlbumsBox>
-        <TopAlbums />
+        <AsyncWrapper
+          loading={<TopAlbumsSkeleton />}
+          error={
+            <Alert severity="error">
+              Something went wrong with top albums service :(
+            </Alert>
+          }
+        >
+          <TopAlbums />
+        </AsyncWrapper>
       </AlbumsBox>
     </ContainerStyled>
   )
