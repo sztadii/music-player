@@ -2,8 +2,7 @@ import httpService from './http-service'
 
 export async function findTopAlbums(limit = 10): Promise<TopAlbumsResponse> {
   const response = await httpService.get<TopAlbumsResponse>(
-    `https://itunes.apple.com/us/rss/topalbums/limit=${limit}/json`,
-    { retry: 3, retryDelay: 500, timeout: 5_000 }
+    `https://itunes.apple.com/us/rss/topalbums/limit=${limit}/json`
   )
   return response.data
 }

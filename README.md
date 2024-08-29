@@ -8,7 +8,6 @@ and technical skills along the way.
 
 ### Requirements
 - Framework: React
-- State Management: **Recoil** ( Requirement, otherwise I would not use it )
 - Show top 100 albums based on the json feed here:
   https://itunes.apple.com/us/rss/topalbums/limit=100/json
 - Allow the top 100 to be searchable

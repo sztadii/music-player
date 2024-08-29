@@ -1,7 +1,7 @@
 import { Rating } from '@mui/material'
 import { useCallback } from 'react'
 
-import { useAlbumRatings } from 'src/stores/music-store'
+import { useAlbumRatings } from 'src/hooks/use-album-ratings'
 
 type AlbumRatingsProps = {
   albumId: string
@@ -9,19 +9,19 @@ type AlbumRatingsProps = {
 
 export default function AlbumRatings(props: AlbumRatingsProps) {
   const { albumId } = props
-  const [ratings, setRatings] = useAlbumRatings()
+  const rating = useAlbumRatings(state => state.ratings[albumId])
+  const updateRating = useAlbumRatings(state => state.updateRating)
 
-  const updateRatings = useCallback(
+  const onRatingChange = useCallback(
     (e: unknown, value: number | null) => {
-      const newRatings = { ...ratings, [albumId]: value }
-      setRatings(newRatings)
+      updateRating(albumId, value)
     },
-    [ratings]
+    [updateRating]
   )
 
   return (
     <div data-testid={`AlbumRatings-${albumId}`}>
-      <Rating value={ratings[albumId]} onChange={updateRatings} />
+      <Rating value={rating || 0} onChange={onRatingChange} />
     </div>
   )
 }

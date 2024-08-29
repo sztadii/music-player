@@ -2,20 +2,14 @@ import { screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import { getFromLocalStorage } from 'src/helpers/storage-helpers'
-import {
-  getHttpMocker,
-  renderWithProviders,
-  updateBrowserURL
-} from 'src/helpers/tests-helpers'
+import { getHttpMocker, renderWithProviders } from 'src/helpers/tests-helpers'
 import { TopAlbumsResponse } from 'src/services/music-service'
-
-import HomePage from './home-page'
 
 describe('HomePage', () => {
   const httpMocker = getHttpMocker()
 
   beforeEach(() => {
-    updateBrowserURL('/')
+    localStorage.clear()
   })
 
   it('displays top albums', async () => {
@@ -46,7 +40,9 @@ describe('HomePage', () => {
       status: 200,
       body: albumsMock
     })
-    renderWithProviders(<HomePage />)
+    renderWithProviders({
+      initialEntries: ['/']
+    })
 
     expect(await screen.findByText('Thunderstruck')).toBeVisible()
     expect(await screen.findByText('Back in Black')).toBeVisible()
@@ -80,7 +76,9 @@ describe('HomePage', () => {
       status: 200,
       body: albumsMock
     })
-    renderWithProviders(<HomePage />)
+    renderWithProviders({
+      initialEntries: ['/']
+    })
 
     await waitFor(() => {
       expect(screen.queryAllByTestId('top-albums-item')).toHaveLength(2)
@@ -125,9 +123,9 @@ describe('HomePage', () => {
       body: albumsMock
     })
 
-    updateBrowserURL('/?search="hotline"')
-
-    renderWithProviders(<HomePage />)
+    renderWithProviders({
+      initialEntries: ['/?search=hotline']
+    })
 
     await waitFor(() => {
       expect(screen.queryAllByTestId('top-albums-item')).toHaveLength(1)
@@ -143,7 +141,9 @@ describe('HomePage', () => {
       status: 500
     })
 
-    renderWithProviders(<HomePage />)
+    renderWithProviders({
+      initialEntries: ['/']
+    })
 
     expect(
       await screen.findByText('Something went wrong with top albums service :(')
@@ -158,7 +158,9 @@ describe('HomePage', () => {
       status: 200
     })
 
-    renderWithProviders(<HomePage />)
+    renderWithProviders({
+      initialEntries: ['/']
+    })
 
     expect(
       await screen.findByText(
@@ -198,7 +200,9 @@ describe('HomePage', () => {
       body: albumsMock
     })
 
-    renderWithProviders(<HomePage />)
+    renderWithProviders({
+      initialEntries: ['/']
+    })
 
     const firstAlbumRating = await screen.findByTestId(
       'AlbumRatings-umbrella-id'
