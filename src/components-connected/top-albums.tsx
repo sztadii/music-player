@@ -1,5 +1,4 @@
 import {
-  Alert,
   Avatar,
   Box,
   ListItem,
@@ -10,9 +9,7 @@ import {
   Typography
 } from '@mui/material'
 import truncate from 'lodash/truncate'
-import { Suspense } from 'react'
 
-import ErrorBoundary from 'src/components/error-boundary'
 import Tooltip from 'src/components/tooltip'
 import { useMinBreakpoint } from 'src/helpers/rwd-helpers'
 import { useSearchState } from 'src/hooks/use-search-state'
@@ -20,26 +17,10 @@ import { useTopAlbums } from 'src/hooks/use-top-albums'
 
 import AlbumRatings from './album-ratings'
 
-export default function TopAlbums() {
-  return (
-    <ErrorBoundary
-      fallback={
-        <Alert severity="error">
-          Something went wrong with top albums service :(
-        </Alert>
-      }
-    >
-      <Suspense fallback={<TopAlbumsSkeleton />}>
-        <TopAlbumsContent />
-      </Suspense>
-    </ErrorBoundary>
-  )
-}
-
-function TopAlbumsContent() {
+export function TopAlbums() {
   // TODO I did not have time to make it perfectly responsive, so I hide some elements
   const isBiggerThanSmDevice = useMinBreakpoint('sm')
-  const { data: albums = [] } = useTopAlbums()
+  const { data: albums } = useTopAlbums()
   const [search] = useSearchState()
 
   const filteredAlbums = search
@@ -107,7 +88,7 @@ function TopAlbumsContent() {
   )
 }
 
-function TopAlbumsSkeleton() {
+export function TopAlbumsSkeleton() {
   // TODO I did not have time to make it perfectly responsive, so I hide some elements
   const isBiggerThanSmDevice = useMinBreakpoint('sm')
   const items = new Array(10).fill(null).map((_, index) => index)
