@@ -1,4 +1,3 @@
-import type { Router as RemixRouter } from '@remix-run/router/dist/router'
 import {
   RouteObject,
   RouterProvider,
@@ -17,8 +16,8 @@ const routes: RouteObject[] = [
 
 const routerDefault = createBrowserRouter(routes)
 
-export function Provider({ router = routerDefault }: { router?: RemixRouter }) {
-  return <RouterProvider router={router} />
+export function Provider() {
+  return <RouterProvider router={routerDefault} />
 }
 
 export type CreateRouterForTestingOptions = Parameters<
@@ -27,5 +26,5 @@ export type CreateRouterForTestingOptions = Parameters<
 
 export function createRouterForTesting(opts?: CreateRouterForTestingOptions) {
   const routerForTesting = createMemoryRouter(routes, opts)
-  return <Provider router={routerForTesting} />
+  return <RouterProvider router={routerForTesting} />
 }
