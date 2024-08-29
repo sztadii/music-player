@@ -7,9 +7,8 @@ type AlbumRatingsProps = {
   albumId: string
 }
 
-export default function AlbumRatings(props: AlbumRatingsProps) {
-  const { albumId } = props
-  const rating = useAlbumRatings(state => state.ratings[albumId])
+export default function AlbumRatings({ albumId }: AlbumRatingsProps) {
+  const ratings = useAlbumRatings(state => state.ratings)
   const updateRating = useAlbumRatings(state => state.updateRating)
 
   const onRatingChange = useCallback(
@@ -19,9 +18,11 @@ export default function AlbumRatings(props: AlbumRatingsProps) {
     [updateRating]
   )
 
+  const ratingValue = ratings[albumId] || 0
+
   return (
     <div data-testid={`AlbumRatings-${albumId}`}>
-      <Rating value={rating || 0} onChange={onRatingChange} />
+      <Rating value={ratingValue} onChange={onRatingChange} />
     </div>
   )
 }
