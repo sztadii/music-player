@@ -15,8 +15,8 @@ import { Suspense } from 'react'
 import ErrorBoundary from 'src/components/error-boundary'
 import Tooltip from 'src/components/tooltip'
 import { useMinBreakpoint } from 'src/helpers/rwd-helpers'
-import { useSearchState } from 'src/stores/general-store'
-import { useTopAlbums } from 'src/stores/music-store'
+import { useSearchState } from 'src/hooks/use-search-state'
+import { useTopAlbums } from 'src/hooks/use-top-albums'
 
 import AlbumRatings from './album-ratings'
 
@@ -39,7 +39,7 @@ export default function TopAlbums() {
 function TopAlbumsContent() {
   // TODO I did not have time to make it perfectly responsive, so I hide some elements
   const isBiggerThanSmDevice = useMinBreakpoint('sm')
-  const albums = useTopAlbums()
+  const { data: albums = [] } = useTopAlbums()
   const [search] = useSearchState()
 
   const filteredAlbums = search
@@ -123,8 +123,13 @@ function TopAlbumsSkeleton() {
             secondaryAction={
               isBiggerThanSmDevice && (
                 <Box display="flex" alignItems="center" gap={0.7}>
-                  {new Array(5).fill(null).map(() => (
-                    <Skeleton variant="circular" width={19} height={19} />
+                  {new Array(5).fill(null).map((_, index) => (
+                    <Skeleton
+                      key={index}
+                      variant="circular"
+                      width={19}
+                      height={19}
+                    />
                   ))}
                 </Box>
               )

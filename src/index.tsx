@@ -1,18 +1,18 @@
 import { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 
-import HomePage from 'src/pages/home-page'
+import { Provider as ReactQueryProvider } from 'src/providers/react-query'
+import { Provider as ReactRouterProvider } from 'src/providers/react-router'
 
 import './index.scss'
 import reportWebVitals from './report-web-vitals'
-import StoreProvider from './stores/store-provider'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <StrictMode>
-    <StoreProvider>
-      <HomePage />
-    </StoreProvider>
+    <ReactQueryProvider>
+      <ReactRouterProvider />
+    </ReactQueryProvider>
   </StrictMode>
 )
 
