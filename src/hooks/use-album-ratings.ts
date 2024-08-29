@@ -8,17 +8,14 @@ import {
 } from 'src/helpers/storage-helpers'
 
 type RatingValue = number | null
-type Ratings = Record<string, RatingValue>
 
 type AlbumRatingsStore = {
   ratings: Record<string, RatingValue>
   updateRating: (id: string, value: RatingValue) => void
 }
 
-const initialRatings: Ratings = getFromLocalStorage('albumsRatings') || {}
-
 export const useAlbumRatings = create<AlbumRatingsStore>((set, get) => ({
-  ratings: initialRatings,
+  ratings: getFromLocalStorage('albumsRatings') || {},
   updateRating: (id, value) => {
     const { ratings } = get()
     const newRatings = { ...ratings, [id]: value }
