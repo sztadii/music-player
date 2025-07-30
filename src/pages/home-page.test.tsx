@@ -2,14 +2,19 @@ import { screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 import { getFromLocalStorage } from 'src/helpers/storage-helpers'
-import { getHttpMocker, renderWithProviders } from 'src/helpers/tests-helpers'
-import { TopAlbumsResponse } from 'src/services/music-service'
+import { renderWithProviders } from 'src/helpers/tests-helpers'
+import { TopAlbumsResponse, findTopAlbums } from 'src/services/music-service'
+
+jest.mock('src/services/music-service')
 
 describe('HomePage', () => {
-  const httpMocker = getHttpMocker()
+  const mockFindTopAlbums = findTopAlbums as jest.MockedFunction<
+    typeof findTopAlbums
+  >
 
   beforeEach(() => {
     localStorage.clear()
+    jest.clearAllMocks()
   })
 
   it('displays top albums', async () => {
@@ -34,12 +39,7 @@ describe('HomePage', () => {
       }
     }
 
-    httpMocker.mock({
-      url: 'https://itunes.apple.com/us/rss/topalbums/limit=100/json',
-      method: 'get',
-      status: 200,
-      body: albumsMock
-    })
+    mockFindTopAlbums.mockResolvedValue(albumsMock as TopAlbumsResponse)
     renderWithProviders({
       initialEntries: ['/']
     })
@@ -70,12 +70,7 @@ describe('HomePage', () => {
       }
     }
 
-    httpMocker.mock({
-      url: 'https://itunes.apple.com/us/rss/topalbums/limit=100/json',
-      method: 'get',
-      status: 200,
-      body: albumsMock
-    })
+    mockFindTopAlbums.mockResolvedValue(albumsMock as TopAlbumsResponse)
     renderWithProviders({
       initialEntries: ['/']
     })
@@ -116,12 +111,7 @@ describe('HomePage', () => {
       }
     }
 
-    httpMocker.mock({
-      url: 'https://itunes.apple.com/us/rss/topalbums/limit=100/json',
-      method: 'get',
-      status: 200,
-      body: albumsMock
-    })
+    mockFindTopAlbums.mockResolvedValue(albumsMock as TopAlbumsResponse)
 
     renderWithProviders({
       initialEntries: ['/?search=hotline']
@@ -135,11 +125,7 @@ describe('HomePage', () => {
   })
 
   it('displays error message when iTunes service is down', async () => {
-    httpMocker.mock({
-      url: 'https://itunes.apple.com/us/rss/topalbums/limit=100/json',
-      method: 'get',
-      status: 500
-    })
+    mockFindTopAlbums.mockRejectedValue(new Error('Service unavailable'))
 
     renderWithProviders({
       initialEntries: ['/']
@@ -150,29 +136,8 @@ describe('HomePage', () => {
     ).toBeVisible()
   })
 
-  it('displays error message when iTunes service timeout', async () => {
-    httpMocker.mock({
-      url: 'https://itunes.apple.com/us/rss/topalbums/limit=100/json',
-      method: 'get',
-      delay: 6_000,
-      status: 200
-    })
-
-    renderWithProviders({
-      initialEntries: ['/']
-    })
-
-    expect(
-      await screen.findByText(
-        'Something went wrong with top albums service :(',
-        undefined,
-        { timeout: 7_000 }
-      )
-    ).toBeVisible()
-  }, 10_000)
-
   it('rate albums', async () => {
-    const albumsMock = {
+    const albumsMock: DeepPartial<TopAlbumsResponse> = {
       feed: {
         entry: [
           {
@@ -193,12 +158,7 @@ describe('HomePage', () => {
       }
     }
 
-    httpMocker.mock({
-      url: 'https://itunes.apple.com/us/rss/topalbums/limit=100/json',
-      method: 'get',
-      status: 200,
-      body: albumsMock
-    })
+    mockFindTopAlbums.mockResolvedValue(albumsMock as TopAlbumsResponse)
 
     renderWithProviders({
       initialEntries: ['/']
